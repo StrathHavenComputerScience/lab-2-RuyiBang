@@ -5,7 +5,14 @@ public class Lab2
     Robot.load("square.txt");
     Robot.setDelay(0.1);
     
-    //INSERT CODE HERE
+    while (Robot.frontIsClear()) {
+        Robot.move();
+        if (Robot.onDark()) {
+            Robot.makeLight();
+        } else {
+            Robot.turnLeft();
+        }
+    }
   }
   
   public static void darkenComb()
@@ -13,7 +20,43 @@ public class Lab2
     Robot.load("comb.txt");
     Robot.setDelay(0.05);
     
-    //INSERT CODE HERE
+    int counter = 0;
+    
+    while (counter <= 3) {
+        turnRight();
+        while (Robot.frontIsClear()) {
+                Robot.makeDark();
+                if (Robot.onDark()) {
+                        Robot.move();
+                }
+            }
+        turnAround();
+        Robot.makeDark();
+        while (Robot.frontIsClear()) {
+                if (Robot.onDark()) {
+                    Robot.move();
+                }
+            }
+        turnRight();
+        Robot.move();
+        Robot.makeDark();
+        Robot.move();
+        counter ++;
+    }
+        turnRight();
+        while (Robot.frontIsClear()) {
+            Robot.makeDark();
+            if (Robot.onDark()) {
+                Robot.move();
+            }
+        }
+        turnAround();
+        Robot.makeDark();
+        while (Robot.frontIsClear()) {
+            if (Robot.onDark()) {
+                Robot.move();
+            }
+        }
   }
   
   public static void makeCheckered()
@@ -21,6 +64,62 @@ public class Lab2
     Robot.load("blank.txt");
     Robot.setDelay(0.05);
     
-    //INSERT CODE HERE
+    int counter = 0;
+    int repeat = 0;
+    
+    while (repeat <= 2) {
+        while (counter <= 6) {
+            Robot.makeDark();
+            Robot.move();  
+             if (Robot.frontIsClear()) {
+                 Robot.move();
+                 counter ++;
+            } else {
+                turnRight();
+                Robot.move();
+                turnRight();
+                counter++;
+            }
+        }
+        if (counter > 6) {
+                Robot.makeDark();
+                Robot.move();
+                Robot.turnLeft();
+                
+                Robot.move();
+                Robot.turnLeft();
+                repeat++;
+                counter = 0;
+            }
+        while (repeat >= 3) {  
+             while (counter <= 7) {
+                 Robot.makeDark();
+                 Robot.move();  
+                 if (Robot.frontIsClear()) {
+                 Robot.move();
+                 counter ++;
+                } else {
+                turnRight();
+                Robot.move();
+                turnRight();
+                counter++;
+                }
+            }
+        }
+    }
   }
+  
+  public static void turnRight()
+  {
+      Robot.turnLeft();
+      Robot.turnLeft();
+      Robot.turnLeft();
+    }
+    
+    public static void turnAround() 
+    {
+        Robot.turnLeft();
+        Robot.turnLeft();
+    }
+  
 }
